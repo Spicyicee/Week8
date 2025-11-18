@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
  
 app.use(express.json());
-app.set('port', 3000)
+// app.set('port', 3000)
 app.use((req, res, next)=>{
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Credentials', 'true')
@@ -74,6 +74,8 @@ app.delete('/collectione/:collectionName/:id', (req, res, next) => {
        (e, result) => { if (e) return next(e) 
         res.send((result.result.n === 1) ? {msg: 'success'} : {msg: 'error'}) }) })
  
-app.listen(3000,()=>{
+
+const port = process.env.PORT || 3000;
+app.listen(port,()=>{
     console.log("Express.js server running at localhost:3000")
 })
